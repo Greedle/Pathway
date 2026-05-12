@@ -1,0 +1,534 @@
+/* GRUNDSTIL OCH LAYOUT */
+body { 
+    font-family: 'Jost', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #f0f2f5; 
+    margin: 0; 
+    padding: 0;
+    color: #333; 
+}
+
+/* KOMPAKT MENY (STATUS-BAR) */
+#status-bar { 
+    background: white; 
+    padding: 4px 20px; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 4px 20px;
+}
+
+#status-bar img {
+    grid-row: 1 / 3;
+}
+
+#status-bar .controls {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+#status-bar .controls-sub {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#status-bar #progress-area {
+    grid-column: 3;
+    grid-row: 1 / 3;
+}
+
+#status-bar h1 { 
+    font-size: 1.1em; 
+    margin: 0;
+    white-space: nowrap;
+    color: #cc0000;
+}
+
+.controls { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    flex-grow: 1; 
+}
+
+.controls label { display: none; }
+
+select#program-select { 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    min-width: 200px;
+    font-size: 0.9em; 
+}
+
+.export-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 12px; 
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* EXAMENSKRAV / PROGRESS AREA */
+#progress-area {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 260px;
+    max-width: 320px;
+}
+
+.examenskrav-rad {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.krav-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.krav-namn {
+    font-size: 0.75em;
+    color: #555;
+    white-space: nowrap;
+}
+
+.krav-varden {
+    font-size: 0.75em;
+    color: #333;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.krav-bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    accent-color: #007bff;
+}
+
+.krav-bar.krav-uppfyllt {
+    accent-color: #28a745;
+}
+
+/* TRÄD-CONTAINER */
+.tree-container { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+    padding: 20px; 
+    width: auto;
+}
+
+/* ÅRS-GRUPPERING */
+.ar-container {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background: #f8f9fa;
+}
+
+.ar-container h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    color: #444;
+    text-transform: uppercase;
+}
+
+/* TERMINS-GRUPPERING */
+.terminer-wrapper {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.termin-container {
+    flex: 1; 
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.view-btn {
+    display: none;
+}
+
+.single-year-view .ar-container {
+    border: 3px solid #007bff;
+    background: white;
+}
+
+.single-year-view .kurs-card {
+    padding: 15px;
+    font-size: 1em;
+}
+
+.single-year-view .termin-container h4 {
+    font-size: 1.1em;
+    color: #007bff;
+}
+
+.termin-container h4 {
+    margin: 0 0 10px 0;
+    font-size: 0.85em;
+    text-align: center;
+    color: #777;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* PERIOD-KOLUMNER */
+.perioder-wrapper {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.period-column {
+    flex: 1; 
+    background: #fafafa;
+    border: 1px dashed #ced4da;
+    border-radius: 6px;
+    padding: 8px;
+    min-height: 100px;
+}
+
+.period-column h5 {
+    margin: 0 0 8px 0;
+    font-size: 0.75em;
+    text-align: center;
+    color: #999;
+}
+
+/* KURSKORT */
+.kurs-card { 
+    background: #fff; 
+    border: 1px solid #e0e0e0; 
+    padding: 8px; 
+    margin-bottom: 8px; 
+    border-radius: 6px; 
+    border-left: 5px solid #ccc; 
+    font-size: 0.85em;
+    word-break: break-word;
+}
+
+.obligatorisk { border-left-color: #d9534f; }
+.valbar-plats  { border-left-color: #f0ad4e; }
+
+.kurs-dropdown { 
+    width: 100%; 
+    margin-top: 5px; 
+    padding: 3px; 
+    font-size: 0.8em; 
+}
+
+.kurs-dropdown:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background: #f5f5f5;
+}
+
+/* KRAV-VARNINGAR */
+.krav-container { 
+    margin-top: 8px; 
+    padding-top: 5px; 
+    border-top: 1px solid #eee; 
+}
+
+.v-text { font-size: 0.75em; margin-bottom: 2px; }
+.v-hard { color: #d9534f; font-weight: bold; }
+.v-soft { color: #f0ad4e; }
+
+.kurs-card.har-varning { 
+    background-color: #fff8f8; 
+    border-right: 3px solid #ff4444; 
+}
+
+/* UTSKRIFT (PDF) */
+@media print {
+    #status-bar, .kurs-check, .kurs-dropdown, .export-btn { display: none !important; }
+    body { background: white; }
+    .tree-container { display: block; }
+    .ar-container { border: none; margin-bottom: 40px; }
+    .termin-container { border: none; }
+    .kurs-card:not(:has(input:checked)) { display: none; }
+}
+
+/* KLARADE KURSER */
+.kurs-card.klarad {
+    background-color: #f0faf3;
+}
+
+/* TRE-PUNKTERS MENY */
+.kort-meny-wrapper {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    z-index: 10;
+}
+
+.kurs-card {
+    position: relative;
+}
+
+.kort-meny-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #888;
+    padding: 2px 6px;
+    line-height: 1;
+    border-radius: 4px;
+    transition: background 0.15s, color 0.15s;
+    display: block;
+    letter-spacing: 1px;
+}
+
+.kort-meny-btn:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.kort-meny {
+    position: absolute;
+    right: 0;
+    top: 22px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    min-width: 160px;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.kort-meny-val {
+    display: block;
+    width: 100%;
+    padding: 8px 14px;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 0.85em;
+    cursor: pointer;
+    color: #333;
+    transition: background 0.1s;
+}
+
+.kort-meny-val:hover { background: #f5f5f5; }
+
+/* TILLGODORÄKNING */
+.tillgodo-form {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+}
+
+.tillgodo-input {
+    width: 100%;
+    padding: 4px 6px;
+    font-size: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.tillgodo-ok-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+.tillgodo-avbryt-btn {
+    background: #f0f0f0;
+    color: #555;
+    border: none;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+.tillgodo-badge {
+    display: block;
+    margin-top: 6px;
+    padding: 4px 8px;
+    background: #e8f5e9;
+    border-radius: 4px;
+    color: #2e7d32;
+    font-size: 0.75em;
+}
+
+.tillgodo-ta-bort {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-left: 4px;
+    padding: 0;
+}
+
+.tillgodo-ta-bort:hover { color: #d32f2f; }
+
+.kurs-card.tillgodoräknad {
+    background-color: #f0faf3;
+}
+
+/* HOVER DROPSHADOW PÅ KURSKORT */
+.kurs-card {
+    transition: box-shadow 0.15s ease;
+}
+
+.kurs-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* BETYG */
+.betyg-toggle-btn {
+    background: #6c757d;
+}
+
+.betyg-toggle-aktiv {
+    background: #cc0000 !important;
+}
+
+.betyg-wrapper {
+    margin-top: 6px;
+}
+
+.betyg-select {
+    width: 100%;
+    padding: 3px 6px;
+    font-size: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fffef0;
+    cursor: pointer;
+}
+
+.betyg-select option[value="U"] { color: #d9534f; }
+.betyg-select option[value="3"] { color: #f0ad4e; }
+.betyg-select option[value="4"] { color: #5bc0de; }
+.betyg-select option[value="5"] { color: #28a745; }
+
+.ar-betyg-snitt {
+    font-size: 0.7em;
+    font-weight: 400;
+    color: #888;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+#total-betyg-snitt {
+    padding: 0 8px;
+    font-weight: 500;
+}
+
+/* DRAG AND DROP */
+
+.kurs-card.dras {
+    opacity: 0.4;
+    cursor: grabbing;
+}
+
+.kurs-card.drag-over {
+    border-top: 2px solid #007bff;
+}
+
+/* PROGRAM-LÄNKAR */
+#program-länkar {
+    display: flex;
+    gap: 6px;
+}
+
+.program-länk-btn {
+    padding: 5px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    color: #333;
+    font-size: 0.78em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.program-länk-btn:hover {
+    background: #f5f5f5;
+    border-color: #999;
+}
+
+/* SHIMMER */
+@keyframes kortSkimmer {
+    0%   { transform: translateX(-150%); }
+    100% { transform: translateX(150%); }
+}
+
+.kurs-card.skimmer {
+    overflow: hidden;
+}
+
+.kurs-card.skimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(
+        105deg,
+        transparent 20%,
+        rgba(255,255,255,0.6) 50%,
+        transparent 80%
+    );
+    animation: kortSkimmer 1.2s ease forwards;
+    pointer-events: none;
+}
+
+/* ─── SÖK ─────────────────────────────────────────────────────────────────── */
+#sök-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 0.85em;
+    width: 180px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+#sök-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
+}

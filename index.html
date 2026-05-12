@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>StudieKoll UU - v2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="status-bar">
+        <img src="Pathway_Logo.png" alt="Pathway" style="height: 120px;">
+        
+        <div class="controls">
+            <label for="program-select"><strong>Välj ditt program:</strong></label>
+            <select id="program-select">
+                <option value="">-- Välj ett program --</option>
+            </select>
+            <div id="program-länkar"></div>
+            <button class="export-btn" onclick="window.print()">Spara studieplan (PDF)</button>
+            <button class="export-btn betyg-toggle-btn" id="betyg-toggle-btn" onclick="toggleBetygLäge()" style="display:none;">★ Visa betyg</button>
+        </div>
+
+        <div class="controls-sub">
+            <input type="search" id="sök-input" placeholder="🔍 Sök kurs..." oninput="sök(this.value)" style="display:none;">
+        </div>
+
+        <div id="progress-area" style="display:none;"></div>
+    </div>
+
+    <div class="tree-container" id="tree"></div>
+
+    <script src="helpers.js"></script>
+    <script src="UU-Energisystem.js"></script>
+    <script src="UU-Elektroteknik.js"></script>
+    <script src="UU-Kemiteknik.js"></script>
+    <script src="UU-MolekylarBioteknik.js"></script>
+    <script src="UU-SystemITeknikOchSamhalle.js"></script>
+    <script src="UU-IndustriellEkonomi.js"></script>
+    <script src="UU-Informationsteknologi.js"></script>
+    <script src="UU-TekniskFysikMedMaterialVetenskap.js"></script>
+    <script src="UU-TekniskFysik.js"></script>
+    <script src="UU-MiljoOchVattenTeknik.js"></script>
+    <script src="index.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
