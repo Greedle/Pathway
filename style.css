@@ -532,13 +532,20 @@ select#program-select {
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
 }
+/* CONTROLS SUB-ROW */
+.controls-sub {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
 
 /* ─── MOBILANPASSNING ───────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
     /* Status bar — stapla vertikalt */
     #status-bar {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         align-items: flex-start;
         padding: 10px 12px;
@@ -546,12 +553,12 @@ select#program-select {
     }
 
     #status-bar img {
-        height: 60px !important;
+        height: 50px !important;
     }
 
     .controls {
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 6px;
         width: 100%;
     }
 
@@ -565,13 +572,14 @@ select#program-select {
     }
 
     .export-btn {
-        font-size: 0.75em;
-        padding: 5px 10px;
+        font-size: 0.72em;
+        padding: 4px 8px;
     }
 
     #progress-area {
         width: 100%;
         max-width: unset;
+        min-width: unset;
     }
 
     .controls-sub {
@@ -583,41 +591,54 @@ select#program-select {
         box-sizing: border-box;
     }
 
-    /* Träd — smalare padding */
+    /* Träd */
     .tree-container {
-        padding: 10px;
-        gap: 12px;
+        padding: 8px;
+        gap: 10px;
     }
 
-    /* År-container */
     .ar-container {
-        padding: 10px;
+        padding: 8px;
     }
 
     /* Terminer — stapla vertikalt */
     .terminer-wrapper {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
     }
 
-    /* Perioder — stapla vertikalt */
+    /* Perioder — 2 kolumner på mobil istället för 4 */
     .perioder-wrapper {
-        flex-direction: column;
-        gap: 8px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
     }
 
     .period-column {
         min-height: unset;
+        padding: 6px;
     }
 
-    /* Kurskort — lite större text */
+    /* Kurskort */
     .kurs-card {
-        font-size: 0.9em;
-        padding: 10px;
+        font-size: 0.82em;
+        padding: 7px 7px 7px 10px;
     }
 
-    /* Dropdown full bredd */
     .kurs-dropdown {
-        font-size: 0.85em;
+        font-size: 0.8em;
+    }
+
+    /* År-rubrik */
+    .ar-container h2 {
+        font-size: 0.95em;
+    }
+
+    .termin-container h4 {
+        font-size: 0.8em;
+    }
+
+    .period-column h5 {
+        font-size: 0.7em;
     }
 }
