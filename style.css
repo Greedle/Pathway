@@ -532,3 +532,92 @@ select#program-select {
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
 }
+
+/* ─── MOBILANPASSNING ───────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Status bar — stapla vertikalt */
+    #status-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    #status-bar img {
+        height: 60px !important;
+    }
+
+    .controls {
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+    }
+
+    select#program-select {
+        width: 100%;
+        min-width: unset;
+    }
+
+    #program-länkar {
+        flex-wrap: wrap;
+    }
+
+    .export-btn {
+        font-size: 0.75em;
+        padding: 5px 10px;
+    }
+
+    #progress-area {
+        width: 100%;
+        max-width: unset;
+    }
+
+    .controls-sub {
+        width: 100%;
+    }
+
+    #sök-input {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* Träd — smalare padding */
+    .tree-container {
+        padding: 10px;
+        gap: 12px;
+    }
+
+    /* År-container */
+    .ar-container {
+        padding: 10px;
+    }
+
+    /* Terminer — stapla vertikalt */
+    .terminer-wrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Perioder — stapla vertikalt */
+    .perioder-wrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .period-column {
+        min-height: unset;
+    }
+
+    /* Kurskort — lite större text */
+    .kurs-card {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    /* Dropdown full bredd */
+    .kurs-dropdown {
+        font-size: 0.85em;
+    }
+}
