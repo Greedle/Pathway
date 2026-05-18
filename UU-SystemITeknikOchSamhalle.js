@@ -108,6 +108,8 @@ const stsProgram = {
     id: "3100",
     namn: "Civilingenjörsprogrammet i system i teknik och samhälle",
     examenspoang: 300,
+    studieplan_url: "https://www.uu.se/utbildning/studieplan?query=10071",
+    utbildningsplan_url: "https://www.uu.se/utbildning/utbildningsplan?query=87aa007b-e58d-11f0-af1e-4773ce254d84",
 
     examenskrav: [
         { typ: "min-hp",             varde: 300, beskrivning: "Totalt antal HP" },

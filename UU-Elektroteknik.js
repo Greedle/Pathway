@@ -62,6 +62,8 @@ const elektroteknkProgram = {
     id: "2800",
     namn: "Civilingenjörsprogrammet i elektroteknik",
     examenspoang: 300,
+    studieplan_url: "https://www.uu.se/utbildning/studieplan?query=1905",
+    utbildningsplan_url: "https://www.uu.se/utbildning/utbildningsplan?query=36d3664e-e57a-11f0-af1e-4773ce254d84",
 
     examenskrav: [
         { typ: "min-hp",             varde: 300, beskrivning: "Totalt antal HP" },

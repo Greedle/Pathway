@@ -546,8 +546,8 @@ select#program-select {
 .controls-sub {
     display: flex;
     align-items: center;
-    gap: 0px;
-    margin-top: 0px;
+    gap: 8px;
+    margin-top: -40px;
 }
 
 /* ─── MOBILANPASSNING ───────────────────────────────────────────────────────── */
@@ -651,4 +651,13 @@ select#program-select {
     .period-column h5 {
         font-size: 0.7em;
     }
+}
+/* EXPORTERA / IMPORTERA */
+.btn-exportera {
+    background: #E8820C;
+}
+
+.btn-importera {
+    background: #C65888;
+    cursor: pointer;
 }

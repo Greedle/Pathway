@@ -126,6 +126,9 @@ const kemiteknikProgram = {
     id: "2900",
     namn: "Civilingenjörsprogrammet i kemiteknik",
     examenspoang: 300,
+    studieplan_url: "https://www.uu.se/utbildning/studieplan?query=f39d9938-4ed2-43b0-9c80-507764827e7f",
+    utbildningsplan_url: "https://www.uu.se/utbildning/utbildningsplan?query=dc8a7423-e579-11f0-af1e-4773ce254d84",
+
 
     examenskrav: [
         { typ: "min-hp",             varde: 300, beskrivning: "Totalt antal HP" },

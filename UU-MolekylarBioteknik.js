@@ -70,6 +70,9 @@ const molekylarBioteknkProgram = {
     id: "3000",
     namn: "Civilingenjörsprogrammet i molekylär bioteknik",
     examenspoang: 300,
+    studieplan_url: "https://www.uu.se/utbildning/studieplan?query=4bfbfcf7-c6eb-40c5-9124-6730b6ede86c",
+    utbildningsplan_url: "https://www.uu.se/utbildning/utbildningsplan?query=5fb2741e-e58f-11f0-af1e-4773ce254d84",
+
 
     examenskrav: [
         { typ: "min-hp",             varde: 300, beskrivning: "Totalt antal HP" },

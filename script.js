@@ -994,6 +994,61 @@ function sök(query) {
     });
 }
 
+// ─── EXPORTERA / IMPORTERA PLAN ──────────────────────────────────────────────
+
+function exporteraPlan() {
+    const data = {
+        version: 2,
+        exporterad: new Date().toISOString(),
+        program: localStorage.getItem('valtProgram_v2'),
+        kursval: localStorage.getItem('studieKoll_v2_data'),
+        betyg: localStorage.getItem('studieKoll_betyg'),
+        tillgodo: localStorage.getItem('studieKoll_tillgodo'),
+        betygLage: localStorage.getItem('betygLäge'),
+    };
+
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'pathway-plan.json';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function importeraPlan(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const data = JSON.parse(e.target.result);
+            if (!data.version || data.version !== 2) {
+                alert('Filen verkar inte vara en giltig Pathway-plan.');
+                return;
+            }
+            if (!confirm('Detta ersätter din nuvarande plan. Fortsätta?')) return;
+
+            if (data.program)   localStorage.setItem('valtProgram_v2', data.program);
+            if (data.kursval)   localStorage.setItem('studieKoll_v2_data', data.kursval);
+            if (data.betyg)     localStorage.setItem('studieKoll_betyg', data.betyg);
+            if (data.tillgodo)  localStorage.setItem('studieKoll_tillgodo', data.tillgodo);
+            if (data.betygLage) localStorage.setItem('betygLäge', data.betygLage);
+
+            if (data.program) {
+                programSelect.value = data.program;
+                programSelect.dispatchEvent(new Event('change'));
+            }
+        } catch {
+            alert('Kunde inte läsa filen. Kontrollera att det är en Pathway JSON-fil.');
+        }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+}
+
 // ─── UPPSTART ─────────────────────────────────────────────────────────────────
 
 const senastValtProgram = localStorage.getItem('valtProgram_v2');
