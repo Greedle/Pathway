@@ -114,6 +114,7 @@ const elektroteknkProgram = {
         // ÅR 4 — Termin 7 (valbara)
         valbar("VAL-ELEKTRO-T7P1-1", 13, 5, ALT_ELEKTRO_T7P1),
         valbar("VAL-ELEKTRO-T7P1-2", 13, 5, ALT_ELEKTRO_T7P1),
+        valbar("VAL-ELEKTRO-T7P1-3", 13, 5, ALT_ELEKTRO_T7P1),
         valbar("VAL-ELEKTRO-T7P2-1", 14, 5, ALT_ELEKTRO_T7P2),
         valbar("VAL-ELEKTRO-T7P2-2", 14, 5, ALT_ELEKTRO_T7P2),
         valbar("VAL-ELEKTRO-T7P2-3", 14, 5, ALT_ELEKTRO_T7P2),
