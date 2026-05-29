@@ -30,6 +30,8 @@ body {
     grid-template-rows: auto auto;
     align-items: center;
     gap: 0px 20px;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 #status-bar img {
@@ -421,7 +423,7 @@ select#program-select {
 }
 
 .kurs-card:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
 }
 
 /* BETYG */
@@ -609,6 +611,7 @@ select#program-select {
 
     .ar-container {
         padding: 8px;
+        contain: layout style;
     }
 
     /* Terminer — stapla vertikalt */
@@ -633,6 +636,7 @@ select#program-select {
     .kurs-card {
         font-size: 0.82em;
         padding: 7px 7px 7px 10px;
+        contain: layout style;
     }
 
     .kurs-dropdown {

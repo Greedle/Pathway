@@ -4,7 +4,7 @@
 function valbar(kod, period, hp, alternativ, obligatorisk = false) {
     return {
         kod,
-        namn: "Valbar teknisk kurs",
+        namn: "",
         hp_per_period: { [period]: hp },
         obligatorisk,
         avancerad: false,

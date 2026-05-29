@@ -124,10 +124,16 @@ function uppdateraExamenskrav() {
         räknadeKoder.add(kod);
         const kursData = valdPlan.kurser.find(k => k.kod === kod);
         if (!kursData) return;
-        if (kursData.alternativ) {
+        const card = cb.closest('.kurs-card');
+        const tillgodoHp = card ? parseFloat(card.getAttribute('data-tillgodo-hp')) : NaN;
+        if (!isNaN(tillgodoHp)) {
+            totalHp += tillgodoHp;
+        } else if (kursData.alternativ) {
             const sel = document.querySelector(`.kurs-dropdown[data-parent-kod="${kod}"]`);
             if (sel && sel.getAttribute('data-spillover') === 'true') return;
-            totalHp += parseFloat(sel?.selectedOptions[0]?.getAttribute('data-hp')) || 0;
+            const thisHp = parseFloat(sel?.selectedOptions[0]?.getAttribute('data-hp')) || 0;
+            const hasSynk = sel?.selectedOptions[0]?.getAttribute('data-synkad-med');
+            totalHp += hasSynk ? thisHp * 2 : thisHp;
         } else {
             totalHp += Object.values(kursData.hp_per_period).reduce((a, b) => a + b, 0);
         }
@@ -257,7 +263,7 @@ function renderaDiagram(plan) {
                         </div>
                     </div>
                     <input type="checkbox" class="kurs-check" data-kod="${kurs.kod}">
-                    <label><strong>Valbar (${slotHp} hp):</strong> ${kurs.namn}</label>
+                    <label><strong>Valbar Kurs:</strong> ${kurs.namn}</label>
                     <div class="betyg-wrapper" style="display:none;">
                         <select class="betyg-select" data-kod="${kurs.kod}" data-ar="${Math.ceil(p / 4)}">
                             <option value="">— Betyg —</option>
@@ -696,6 +702,8 @@ function visaTillgodoForm(card) {
     form.innerHTML = `
         <small style="display:block;margin-bottom:4px;color:#555;">Ange kurs som tillgodoräknas:</small>
         <input class="tillgodo-input" type="text" placeholder="T.ex. MATA21 Linjär Algebra">
+        <small style="display:block;margin:6px 0 3px;color:#555;">Antal HP:</small>
+        <input class="tillgodo-hp-input" type="number" min="0" step="0.5" placeholder="T.ex. 7.5" style="width:100%;padding:4px 6px;font-size:0.8em;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
         <div style="display:flex;gap:6px;margin-top:6px;">
             <button class="tillgodo-ok-btn">Bekräfta</button>
             <button class="tillgodo-avbryt-btn">Avbryt</button>
@@ -709,8 +717,9 @@ function visaTillgodoForm(card) {
 
     form.querySelector('.tillgodo-ok-btn').addEventListener('click', () => {
         const kursnamn = form.querySelector('.tillgodo-input').value.trim();
+        const hpVal = parseFloat(form.querySelector('.tillgodo-hp-input').value) || null;
         if (!kursnamn) return;
-        bekräftaTillgodo(card, kursnamn);
+        bekräftaTillgodo(card, kursnamn, hpVal);
         form.remove();
     });
 
@@ -721,8 +730,9 @@ function visaTillgodoForm(card) {
     });
 }
 
-function bekräftaTillgodo(card, kursnamn) {
+function bekräftaTillgodo(card, kursnamn, anpassadHp = null) {
     card.classList.add('tillgodoräknad', 'klarad');
+    if (anpassadHp !== null) card.setAttribute('data-tillgodo-hp', anpassadHp);
 
     // Check the checkbox
     const check = card.querySelector('.kurs-check');
@@ -738,7 +748,8 @@ function bekräftaTillgodo(card, kursnamn) {
         badge.className = 'tillgodo-badge';
         card.appendChild(badge);
     }
-    badge.innerHTML = `✅ Tillgodoräknad: <em>${kursnamn}</em> <button class="tillgodo-ta-bort" title="Ta bort">✕</button>`;
+    const hpText = card.getAttribute('data-tillgodo-hp') ? ` (${card.getAttribute('data-tillgodo-hp')} hp)` : '';
+    badge.innerHTML = `✅ Tillgodoräknad: <em>${kursnamn}${hpText}</em> <button class="tillgodo-ta-bort" title="Ta bort">✕</button>`;
     badge.querySelector('.tillgodo-ta-bort').addEventListener('click', () => taBortTillgodo(card));
 
     // Update menu button label
@@ -769,8 +780,11 @@ function sparaTillgodo() {
     const tillgodo = {};
     document.querySelectorAll('.kurs-card.tillgodoräknad').forEach(card => {
         const kod = card.querySelector('.kurs-check')?.getAttribute('data-kod');
-        const kursnamn = card.querySelector('.tillgodo-badge em')?.textContent;
-        if (kod && kursnamn) tillgodo[kod] = kursnamn;
+        const em = card.querySelector('.tillgodo-badge em');
+        // Strip the HP suffix from display text to get just the course name
+        const kursnamn = em?.textContent?.replace(/\s*\(\d+(\.\d+)?\s*hp\)\s*$/, '').trim();
+        const hp = card.getAttribute('data-tillgodo-hp');
+        if (kod && kursnamn) tillgodo[kod] = { kursnamn, hp: hp ? parseFloat(hp) : null };
     });
     localStorage.setItem('studieKoll_tillgodo', JSON.stringify(tillgodo));
 }
@@ -781,9 +795,13 @@ function laddaTillgodo() {
     let tillgodo;
     try { tillgodo = JSON.parse(raw); } catch { return; }
 
-    for (const [kod, kursnamn] of Object.entries(tillgodo)) {
+    for (const [kod, val] of Object.entries(tillgodo)) {
         const card = document.querySelector(`.kurs-check[data-kod="${kod}"]`)?.closest('.kurs-card');
-        if (card) bekräftaTillgodo(card, kursnamn);
+        if (!card) continue;
+        // Support both old string format and new {kursnamn, hp} format
+        const kursnamn = typeof val === 'string' ? val : val.kursnamn;
+        const hp = typeof val === 'object' ? val.hp : null;
+        bekräftaTillgodo(card, kursnamn, hp);
     }
 }
 
